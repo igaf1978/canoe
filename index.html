@@ -125,8 +125,10 @@ section{padding:clamp(3rem,6vw,5.5rem) clamp(1.2rem,5vw,4rem)}
 .tgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:2px}
 @media(max-width:900px){.tgrid{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:560px){.tgrid{grid-template-columns:repeat(3,1fr)}}
-.ti{aspect-ratio:1;overflow:hidden;cursor:zoom-in;background:var(--sky-pale);position:relative;transition:transform .22s ease,box-shadow .22s ease;transform-origin:center center}
-.ti:hover{transform:scale(1.12);box-shadow:0 8px 24px rgba(0,0,0,.28);z-index:2}
+/* タイル：クリックでその場拡大（別ページ・オーバーレイなし） */
+.ti{aspect-ratio:1;overflow:visible;cursor:zoom-in;background:var(--sky-pale);position:relative;transition:transform .25s ease,box-shadow .25s ease,z-index 0s;transform-origin:center center;z-index:0}
+.ti.zoom{transform:scale(2.2);box-shadow:0 12px 40px rgba(0,0,0,.45);z-index:100;cursor:zoom-out}
+.ti-inner{width:100%;height:100%;overflow:hidden;aspect-ratio:1}
 .ti img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
 .te{grid-column:1/-1;text-align:center;padding:2.5rem;color:var(--text-light);font-size:14px;line-height:1.8}
 
@@ -294,32 +296,24 @@ footer a{color:var(--wave);text-decoration:none}
   <div class="si2">
     <p class="ey reveal">Photo Gallery</p>
     <h2 class="st reveal">フォトギャラリー</h2>
-    <p class="sl reveal">当日撮影した写真をご覧いただけます。写真をクリックすると拡大表示されます。</p>
+    <p class="sl reveal">当日撮影した写真をご覧いただけます。クリックするとその場で拡大されます。</p>
 
-    <!-- Googleドライブ フォルダ埋め込みビューア -->
-    <div class="reveal" style="border-radius:var(--radius);overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.12);">
-      <iframe
-        src="https://drive.google.com/embeddedfolderview?id=1zOLPGpBOAtuKBxwTXC-2hoqRcZFVjL-4#grid"
-        style="width:100%;height:540px;border:none;display:block;background:#fff;"
-        title="フォトギャラリー"
-        allowfullscreen>
-      </iframe>
-    </div>
-    <p style="font-size:12px;color:var(--text-light);margin-top:.6rem;text-align:right;">
-      ※ Googleアカウント不要で閲覧できます。写真をクリックすると拡大・ダウンロードできます。
-    </p>
-
-    <!-- 個別追加パネル（編集時のみ表示） -->
-    <div class="gset reveal" id="gset-manual" style="margin-top:2rem">
-      <p>📌 個別写真をタイル表示に追加する場合はURLまたはファイルIDを入力</p>
+    <!-- 写真追加パネル（編集時） -->
+    <div class="gset reveal" id="gset-manual">
+      <p>📂 GoogleドライブのURLまたはファイルIDを1枚ずつ追加してください</p>
       <div class="grow">
         <div><label>GoogleドライブのURL またはファイルID</label>
         <input type="text" id="gsin" placeholder="https://drive.google.com/file/d/XXXXXX/view またはID"></div>
         <button class="gb" onclick="addSingle()">追加</button>
         <button class="gb" onclick="clearThumbs()" style="background:#888">クリア</button>
       </div>
+      <div class="gnote">写真を右クリック →「リンクをコピー」でURLを取得できます。</div>
     </div>
-    <div id="tgrid" class="tgrid" style="margin-top:1rem"></div>
+
+    <!-- タイルグリッド -->
+    <div id="tgrid" class="tgrid" style="margin-top:1.5rem">
+      <div class="te">上のフォームからGoogleドライブの写真を追加してください。</div>
+    </div>
   </div>
 </section>
 
@@ -457,14 +451,27 @@ function renderThumbs() {
   g.innerHTML = '';
   gdItems.forEach((item, i) => {
     const d = document.createElement('div');
-    d.className = 'ti'; d.title = item.name;
+    d.className = 'ti';
+    const inner = document.createElement('div');
+    inner.className = 'ti-inner';
     const img = document.createElement('img');
-    img.src = tUrl(item.id); img.alt = item.name; img.loading = 'lazy';
+    img.src = tUrl(item.id); img.alt = ''; img.loading = 'lazy';
     img.onerror = () => { d.style.background='var(--sky-pale)'; img.style.display='none'; };
-    d.appendChild(img);
-    d.onclick = () => openLb(i);
+    inner.appendChild(img);
+    d.appendChild(inner);
+    d.onclick = (e) => {
+      e.stopPropagation();
+      const isZoomed = d.classList.contains('zoom');
+      // 他を全部閉じる
+      document.querySelectorAll('.ti.zoom').forEach(el => el.classList.remove('zoom'));
+      if (!isZoomed) d.classList.add('zoom');
+    };
     g.appendChild(d);
   });
+  // グリッド外クリックで全解除
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.ti.zoom').forEach(el => el.classList.remove('zoom'));
+  }, { once: false });
 }
 
 function openLb(i) { lbIdx=i; updLb(); document.getElementById('lb').classList.add('open'); document.body.style.overflow='hidden'; }
