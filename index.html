@@ -71,7 +71,7 @@ body{font-family:'Zen Kaku Gothic New',sans-serif;background:var(--cream);color:
 .hcatch{font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(2.4rem,5.5vw,4.8rem);color:#fff;line-height:1.18;letter-spacing:.02em;margin-bottom:1rem;text-shadow:0 2px 24px rgba(0,0,0,.35)}
 .hcatch em{font-style:normal;color:var(--gold-pale)}
 .hsub{font-size:clamp(.92rem,1.8vw,1.1rem);color:rgba(255,255,255,.82);line-height:1.9;margin-bottom:1.8rem;max-width:400px}
-.hbadge{display:inline-flex;align-items:center;gap:14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);border-left:3px solid var(--wave);border-radius:0 var(--radius) var(--radius) 0;padding:.9rem 1.6rem;color:#fff;backdrop-filter:blur(12px)}
+.hbadge{display:inline-flex;align-items:center;gap:14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);border-left:3px solid var(--wave);border-radius:0 var(--radius) var(--radius) 0;padding:.9rem 1.6rem;color:#fff;backdrop-filter:blur(12px);flex-wrap:nowrap;min-width:0}
 .hbadge strong{color:var(--gold-pale)}
 
 /* === SECTIONS === */
@@ -122,12 +122,12 @@ section{padding:clamp(3rem,6vw,5.5rem) clamp(1.2rem,5vw,4rem)}
 .gb:hover{background:var(--sky-deep)}
 .gnote{font-size:11.5px;color:var(--text-light);line-height:1.7}
 .gnote code{background:#e8f0f8;padding:1px 5px;border-radius:4px;font-size:11px}
-.tgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}
+.tgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:2px}
 @media(max-width:900px){.tgrid{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:560px){.tgrid{grid-template-columns:repeat(3,1fr)}}
-.ti{aspect-ratio:1;border-radius:6px;overflow:hidden;cursor:pointer;background:var(--sky-pale);position:relative;transition:transform .18s,box-shadow .18s}
-.ti:hover{transform:scale(1.07);box-shadow:0 4px 14px rgba(0,0,0,.2);z-index:1}
-.ti img{width:100%;height:100%;object-fit:cover;display:block}
+.ti{aspect-ratio:1;overflow:hidden;cursor:zoom-in;background:var(--sky-pale);position:relative;transition:transform .22s ease,box-shadow .22s ease;transform-origin:center center}
+.ti:hover{transform:scale(1.12);box-shadow:0 8px 24px rgba(0,0,0,.28);z-index:2}
+.ti img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
 .te{grid-column:1/-1;text-align:center;padding:2.5rem;color:var(--text-light);font-size:14px;line-height:1.8}
 
 /* lightbox */
@@ -139,7 +139,7 @@ section{padding:clamp(3rem,6vw,5.5rem) clamp(1.2rem,5vw,4rem)}
 #lbp{left:16px;top:50%;transform:translateY(-50%);width:48px;height:48px;font-size:1.8rem}
 #lbn{right:16px;top:50%;transform:translateY(-50%);width:48px;height:48px;font-size:1.8rem}
 #lbc:hover,#lbp:hover,#lbn:hover{background:rgba(255,255,255,.2)}
-#lbcap{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.6);font-size:13px;white-space:nowrap}
+#lbcap{display:none}
 
 /* === VIDEO === */
 .vid{background:linear-gradient(180deg,var(--sky-deep) 0%,var(--lake) 100%)}
@@ -232,11 +232,11 @@ footer a{color:var(--wave);text-decoration:none}
   </div>
   <div class="ho"></div>
   <div class="hc">
-    <h1 class="hcatch">親子で<br><em>漕ぎ出そう！</em></h1>
-    <p class="hsub">パドルを握って水面へ。<br>自然の中でしか味わえない感動と<br>忘れられない記憶を、一緒につくろう。</p>
+    <h1 class="hcatch">水の上で、<br><em>親子の時間が深くなる</em></h1>
+    <p class="hsub">静かな水面へ、同じリズムで漕ぎ出す。<br>大倉湖の自然の中で、<br>親子だけの特別な時間を。</p>
     <div class="hbadge">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-      <span style="font-size:clamp(1rem,2vw,1.18rem)"><strong>令和8年6月13日（土）</strong>　9:00〜13:00　大倉湖（大倉ダム）</span>
+      <span style="font-size:clamp(1rem,2vw,1.18rem);white-space:nowrap"><strong>令和8年6月13日（土）</strong>　9:00〜13:00　大倉湖</span>
     </div>
   </div>
 </header>
