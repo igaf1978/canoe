@@ -29,12 +29,12 @@ html{scroll-behavior:smooth}
 body{font-family:'Zen Kaku Gothic New',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
 
 /* === EDIT BANNER === */
-#eb{position:fixed;top:0;left:0;right:0;z-index:9000;background:var(--lake);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:space-between;padding:7px 18px;gap:10px;flex-wrap:wrap}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--wave);animation:pulse 2s infinite;flex-shrink:0}
+#eb{display:none}
+.dot{display:none}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 #eb button{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);color:#fff;padding:4px 12px;border-radius:999px;cursor:pointer;font-size:12px;font-family:inherit}
 #eb button:hover{background:rgba(255,255,255,.22)}
-.bsave{background:var(--gold)!important;color:#1a0800!important;border-color:var(--gold)!important;font-weight:700!important}
+
 
 /* === DROP SLOT === */
 .ds{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:pointer}
@@ -45,7 +45,7 @@ body{font-family:'Zen Kaku Gothic New',sans-serif;background:var(--cream);color:
 .ds.on .si{display:block}
 .ds.dg{outline:3px dashed rgba(91,184,232,.8);outline-offset:-3px}
 .ds.dg::after{content:'📷 ドロップ';position:absolute;inset:0;z-index:30;background:rgba(13,79,138,.78);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#fff}
-.ds.on:hover::before{content:'✎ クリック/ドロップで変更';position:absolute;bottom:0;left:0;right:0;z-index:25;background:rgba(0,0,0,.55);color:#fff;font-size:11px;text-align:center;padding:5px;pointer-events:none}
+.ds.on:hover::before{display:none}
 
 /* === HERO === */
 .hero{position:relative;height:88svh;min-height:520px;max-height:860px;overflow:hidden;display:flex;align-items:center;background:var(--lake)}
@@ -67,7 +67,7 @@ body{font-family:'Zen Kaku Gothic New',sans-serif;background:var(--cream);color:
     rgba(6,30,56,.18) 55%,
     rgba(6,30,56,.0) 100%)}
 .hc{position:relative;z-index:10;padding:clamp(1.5rem,4vw,4rem) clamp(1.5rem,5vw,6rem);max-width:600px}
-.hcatch{font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(2.4rem,5.5vw,4.8rem);color:#fff;line-height:1.18;letter-spacing:.02em;margin-bottom:1rem;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.hcatch{font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(2.1rem,5vw,4.4rem);color:#fff;line-height:1.18;letter-spacing:.02em;margin-bottom:1rem;text-shadow:0 2px 24px rgba(0,0,0,.35)}
 .hcatch em{font-style:normal;color:var(--gold-pale)}
 .hsub{font-size:clamp(.92rem,1.8vw,1.1rem);color:rgba(255,255,255,.82);line-height:1.9;margin-bottom:1.8rem;max-width:400px}
 .hbadge{display:inline-flex;align-items:center;gap:14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);border-left:3px solid var(--wave);border-radius:0 var(--radius) var(--radius) 0;padding:.9rem 1.6rem;color:#fff;backdrop-filter:blur(12px);flex-wrap:nowrap;min-width:0}
@@ -209,6 +209,19 @@ footer a{color:var(--wave);text-decoration:none}
 #lbp{left:16px;top:50%;transform:translateY(-50%);width:50px;height:50px;font-size:2rem}
 #lbn{right:16px;top:50%;transform:translateY(-50%);width:50px;height:50px;font-size:2rem}
 #lbc:hover,#lbp:hover,#lbn:hover{background:rgba(255,255,255,.25)}
+
+/* === 透かし：大倉周辺等高線風 === */
+.page-watermark{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  opacity:.045;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='900' viewBox='0 0 1200 900'%3E%3Cstyle%3Epath%7Bfill:none;stroke:%230d4f8a;stroke-width:1.2%7D%3C/style%3E%3C!-- 等高線風同心楕円群 --%3E%3Cellipse cx='600' cy='420' rx='580' ry='380'/%3E%3Cellipse cx='600' cy='420' rx='520' ry='330'/%3E%3Cellipse cx='600' cy='420' rx='460' ry='280'/%3E%3Cellipse cx='600' cy='420' rx='400' ry='230'/%3E%3Cellipse cx='600' cy='420' rx='340' ry='185'/%3E%3Cellipse cx='600' cy='420' rx='280' ry='145'/%3E%3Cellipse cx='600' cy='420' rx='220' ry='110'/%3E%3Cellipse cx='600' cy='420' rx='160' ry='80'/%3E%3Cellipse cx='600' cy='420' rx='105' ry='55'/%3E%3Cellipse cx='600' cy='420' rx='58' ry='32'/%3E%3C!-- サブ山 左 --%3E%3Cellipse cx='180' cy='200' rx='160' ry='110'/%3E%3Cellipse cx='180' cy='200' rx='120' ry='80'/%3E%3Cellipse cx='180' cy='200' rx='80' ry='52'/%3E%3Cellipse cx='180' cy='200' rx='44' ry='28'/%3E%3C!-- サブ山 右下 --%3E%3Cellipse cx='1020' cy='700' rx='170' ry='115'/%3E%3Cellipse cx='1020' cy='700' rx='125' ry='82'/%3E%3Cellipse cx='1020' cy='700' rx='82' ry='52'/%3E%3Cellipse cx='1020' cy='700' rx='42' ry='26'/%3E%3C!-- 湖（大倉湖）シルエット --%3E%3Cellipse cx='620' cy='390' rx='72' ry='38' style='stroke:%231a7fc4;stroke-width:1.6'/%3E%3Cellipse cx='620' cy='390' rx='52' ry='26' style='stroke:%231a7fc4;stroke-width:1'/%3E%3C!-- 河川ライン --%3E%3Cpath d='M 620 390 Q 560 430 500 480 Q 440 530 380 600 Q 320 670 260 750'/%3E%3Cpath d='M 620 390 Q 680 350 730 310 Q 790 265 860 230'/%3E%3C!-- 方位記号 右下 --%3E%3Cg transform='translate(1100,820)'%3E%3Ccircle cx='0' cy='0' r='22' style='stroke:%230d4f8a;stroke-width:1'/%3E%3Cpath d='M0,-18 L4,-6 L0,-10 L-4,-6 Z' style='fill:%230d4f8a'/%3E%3Cpath d='M0,18 L4,6 L0,10 L-4,6 Z' style='fill:none;stroke:%230d4f8a;stroke-width:1'/%3E%3Ctext x='0' y='-24' text-anchor='middle' font-size='10' fill='%230d4f8a' font-family='serif'%3EN%3C/text%3E%3C/g%3E%3C/svg%3E");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+/* ヒーロー内は透かし不要 */
+.hero{z-index:1}
+.hero ~ * { position:relative; z-index:1; }
 </style>
 </head>
 <body style="padding-top: 0px;">
@@ -217,6 +230,7 @@ footer a{color:var(--wave);text-decoration:none}
 
 
 <!-- HERO -->
+<div class="page-watermark" aria-hidden="true"></div>
 <header class="hero">
   <div class="hpg">
     <div class="ds hp0 on" data-slot="h0" data-name="h0">
@@ -242,7 +256,7 @@ footer a{color:var(--wave);text-decoration:none}
   </div>
   <div class="ho"></div>
   <div class="hc">
-    <h1 class="hcatch">湖の上で、<br><em>深まる<br>親子の時間</em></h1>
+    <h1 class="hcatch">湖の上で<br><em>深まる<br>親子の時間</em></h1>
     <p class="hsub">静かな水面へ、同じリズムで漕ぎ出す。<br>自然豊かな大倉湖で、親子だけの特別な時間を。</p>
     <div class="hbadge">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
