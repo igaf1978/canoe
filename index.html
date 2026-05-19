@@ -210,27 +210,25 @@ footer a{color:var(--wave);text-decoration:none}
 #lbn{right:16px;top:50%;transform:translateY(-50%);width:50px;height:50px;font-size:2rem}
 #lbc:hover,#lbp:hover,#lbn:hover{background:rgba(255,255,255,.25)}
 
-/* === 透かし：大倉周辺等高線風 === */
-.page-watermark{
-  position:fixed;inset:0;z-index:0;pointer-events:none;
-  opacity:.045;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='900' viewBox='0 0 1200 900'%3E%3Cstyle%3Epath%7Bfill:none;stroke:%230d4f8a;stroke-width:1.2%7D%3C/style%3E%3C!-- 等高線風同心楕円群 --%3E%3Cellipse cx='600' cy='420' rx='580' ry='380'/%3E%3Cellipse cx='600' cy='420' rx='520' ry='330'/%3E%3Cellipse cx='600' cy='420' rx='460' ry='280'/%3E%3Cellipse cx='600' cy='420' rx='400' ry='230'/%3E%3Cellipse cx='600' cy='420' rx='340' ry='185'/%3E%3Cellipse cx='600' cy='420' rx='280' ry='145'/%3E%3Cellipse cx='600' cy='420' rx='220' ry='110'/%3E%3Cellipse cx='600' cy='420' rx='160' ry='80'/%3E%3Cellipse cx='600' cy='420' rx='105' ry='55'/%3E%3Cellipse cx='600' cy='420' rx='58' ry='32'/%3E%3C!-- サブ山 左 --%3E%3Cellipse cx='180' cy='200' rx='160' ry='110'/%3E%3Cellipse cx='180' cy='200' rx='120' ry='80'/%3E%3Cellipse cx='180' cy='200' rx='80' ry='52'/%3E%3Cellipse cx='180' cy='200' rx='44' ry='28'/%3E%3C!-- サブ山 右下 --%3E%3Cellipse cx='1020' cy='700' rx='170' ry='115'/%3E%3Cellipse cx='1020' cy='700' rx='125' ry='82'/%3E%3Cellipse cx='1020' cy='700' rx='82' ry='52'/%3E%3Cellipse cx='1020' cy='700' rx='42' ry='26'/%3E%3C!-- 湖（大倉湖）シルエット --%3E%3Cellipse cx='620' cy='390' rx='72' ry='38' style='stroke:%231a7fc4;stroke-width:1.6'/%3E%3Cellipse cx='620' cy='390' rx='52' ry='26' style='stroke:%231a7fc4;stroke-width:1'/%3E%3C!-- 河川ライン --%3E%3Cpath d='M 620 390 Q 560 430 500 480 Q 440 530 380 600 Q 320 670 260 750'/%3E%3Cpath d='M 620 390 Q 680 350 730 310 Q 790 265 860 230'/%3E%3C!-- 方位記号 右下 --%3E%3Cg transform='translate(1100,820)'%3E%3Ccircle cx='0' cy='0' r='22' style='stroke:%230d4f8a;stroke-width:1'/%3E%3Cpath d='M0,-18 L4,-6 L0,-10 L-4,-6 Z' style='fill:%230d4f8a'/%3E%3Cpath d='M0,18 L4,6 L0,10 L-4,6 Z' style='fill:none;stroke:%230d4f8a;stroke-width:1'/%3E%3Ctext x='0' y='-24' text-anchor='middle' font-size='10' fill='%230d4f8a' font-family='serif'%3EN%3C/text%3E%3C/g%3E%3C/svg%3E");
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
+
+
+/* === 透かし === */
+#watermark {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  pointer-events: none;
+  opacity: .15;
+  background: url('watermark.png') center/cover no-repeat;
 }
-/* ヒーロー内は透かし不要 */
-.hero{z-index:1}
-.hero ~ * { position:relative; z-index:1; }
 </style>
 </head>
 <body style="padding-top: 0px;">
 
-<!-- EDIT BANNER -->
-
+<!-- 透かし：等高線MAP -->
+<div id="watermark" aria-hidden="true"></div>
 
 <!-- HERO -->
-<div class="page-watermark" aria-hidden="true"></div>
 <header class="hero">
   <div class="hpg">
     <div class="ds hp0 on" data-slot="h0" data-name="h0">
