@@ -37,7 +37,7 @@ body{font-family:'Zen Kaku Gothic New',sans-serif;background:var(--cream);color:
 
 
 /* === DROP SLOT === */
-.ds{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.ds{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:default}
 .ds input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:20;width:100%;height:100%}
 .ds .si{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;pointer-events:none;z-index:1}
 .ds .sh{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:10px;text-align:center;pointer-events:none;z-index:2;position:relative;transition:opacity .2s;width:100%;height:100%}
@@ -196,7 +196,7 @@ footer a{color:var(--wave);text-decoration:none}
 .gal-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:3px}
 @media(max-width:900px){.gal-grid{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:560px){.gal-grid{grid-template-columns:repeat(3,1fr)}}
-.gi{aspect-ratio:1;overflow:hidden;cursor:zoom-in;position:relative}
+.gi{aspect-ratio:1;overflow:hidden;cursor:default;position:relative}
 .gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s ease}
 .gi:hover img{transform:scale(1.08)}
 
@@ -316,7 +316,7 @@ footer a{color:var(--wave);text-decoration:none}
   </div>
   <div class="ho"></div>
   <div class="hc">
-    <h1 class="hcatch">湖の上で<br><em>深まる</em><br><em style="color:var(--gold-pale)">親子の時間</em></h1>
+    <h1 class="hcatch">湖の上で<br><span style="color:#fff;font-style:normal">深まる</span><br><em>親子の時間</em></h1>
     <p class="hsub">静かな水面へ、同じリズムで漕ぎ出す。<br>自然豊かな大倉湖で、親子だけの特別な時間を。</p>
     <div class="hbadge">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
